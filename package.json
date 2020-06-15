@@ -15,7 +15,9 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
-    "typescript": "~3.7.2"
+    "typescript": "~3.7.2",
+    "uniqid": "^5.2.0",
+    "uuidv4": "^6.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
