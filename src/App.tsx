@@ -38,6 +38,25 @@ const App: React.FC = () => {
     // newTodoを todos に追加
     setTodos((prevTodos) => [...prevTodos, newTodo]);
   };
+
+  // 指定された todo のcompletedを反転する関数
+  // カリー化（関数を返す関数）を使用して，idごとに処理をする
+  const handleTodoChecked = (id: string) => () => {
+    // 引数で指定されたidの
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            completed: !todo.completed,
+          };
+        } else {
+          return todo;
+        }
+      })
+    );
+  };
+
   console.log(JSON.stringify(todos, null, 2));
   return (
     <Container>
@@ -63,18 +82,21 @@ const App: React.FC = () => {
       <Typography variant="h6" component="h2">
         未完了タスク
       </Typography>
+
       <List dense>
-        <ListItem button onClick={() => setChecked(!checked)}>
-          <ListItemIcon>
-            <Checkbox checked={checked} />
-          </ListItemIcon>
-          <ListItemText>タスク1</ListItemText>
-          <ListItemSecondaryAction>
-            <IconButton>
-              <DeleteOutline />
-            </IconButton>
-          </ListItemSecondaryAction>
-        </ListItem>
+        {todos.map((todo) => (
+          <ListItem button onClick={handleTodoChecked(todo.id)}>
+            <ListItemIcon>
+              <Checkbox checked={todo.completed} />
+            </ListItemIcon>
+            <ListItemText>{todo.content}</ListItemText>
+            <ListItemSecondaryAction>
+              <IconButton>
+                <DeleteOutline />
+              </IconButton>
+            </ListItemSecondaryAction>
+          </ListItem>
+        ))}
       </List>
     </Container>
   );
