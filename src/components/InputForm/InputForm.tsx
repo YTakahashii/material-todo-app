@@ -17,7 +17,7 @@ export const InputForm: React.FC<Props> = (props) => {
 
   const handleAddClicked = () => {
     props.addTodo(inputText);
-    const newTodo: Todo = {
+    setInputText('');
   };
 
   return (
