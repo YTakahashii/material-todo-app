@@ -9,6 +9,7 @@ type Props = {
 
 export const InputForm: React.FC<Props> = (props) => {
   const [inputText, setInputText] = useState('');
+  const disabledAddButton = inputText.length === 0;
 
   // inputで値が変更されたときに呼ばれる関数
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -28,7 +29,7 @@ export const InputForm: React.FC<Props> = (props) => {
         onChange={handleInputChange}
         endAdornment={
           <InputAdornment position="end">
-            <IconButton onClick={handleAddClicked}>
+            <IconButton onClick={handleAddClicked} disabled={disabledAddButton}>
               <AddOutlined />
             </IconButton>
           </InputAdornment>
